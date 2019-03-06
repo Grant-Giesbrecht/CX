@@ -31,44 +31,51 @@ int main(int argc, char** argv){
 	string first_arg = argv[1];
 	
 	if (first_arg == "-h" || first_arg == "-H" || first_arg == "-HELP" || first_arg == "-help" || first_arg == "-Help"){
-		cout << "\t************** CX HELP *****************\n" << endl;
-		cout << "\tCX automatically compiles and runs C++" << endl;
-		cout << "\tprograms.\n" << endl;
-		cout << "\tCX works by looking for a compile command" << endl;
-		cout << "\twritten in a comment with the first word" << endl;
-		cout << "\t'CXCOMPILE'. If multiple such comments exist," << endl;
-		cout << "\tthey will be executed in a top to bottom" << endl;
-		cout << "\torder. If no such commands exist, CX will try" << endl;
-		cout << "\tto automatically determine what compiler flags" << endl;
-		cout << "\tare neccesary, but this function is still" << endl;
-		cout << "\tbeing developed.\n" << endl;
-		cout << "\tThe command 'CXPRINTCOM' can be used to tell CX" << endl;
-		cout << "\twhether or not it should print the commands it" << endl;
-		cout << "\twill run. CXPRINTCOM must be followed immediately" << endl;
-		cout << "\tby a space then 'TRUE' or 'FALSE', all uppercase," << endl;
-		cout << "\tno quotes.\n" << endl;
-		cout << "\tThe command 'CXVERCOM' can be used to tell CX" << endl;
-		cout << "\twhether or not it should verify the commands" << endl;
-		cout << "\tit will run with the user before running them." << endl;
-		cout << "\tCXVERCOM must be followed immediately by a space" << endl;
-		cout << "\tthen 'TRUE' or 'FALSE', all uppercase, no quotes.\n" << endl;
-		cout << "\tNOTE: Any and all CX directives (such as CXCOMPILE" << endl;
-		cout << "\tand CXVERCOM) must be present before the main" << endl;
-		cout << "\tfunction is declared.\n" << endl;
-		cout << "\tThe command 'CXGENRUN' can be used to tell CX" << endl;
-		cout << "\twhether or not it should generate the command to" << endl;
-		cout << "\trun the executable. If the user provides an" << endl;
-		cout << "\texecutable run command with a CXCOMPILE directive," << endl;
-		cout << "\tCXGENRUN FALSE prevents CX from generating its own" << endl;
-		cout << "\trun command. CXGENRUN must be followed immediately" << endl;
-		cout << "\tby a space then 'TRUE' or 'FALSE', all uppercase," << endl;
-		cout << "\tno quotes.\n" << endl;
-		cout << "\tExample usages (to run in command line):" << endl;
-		cout << "\t\tcx testprogram    OR    cx testprogram.cpp" << endl;
-		cout << "\tExample usage (to appear in testprogram.cpp):" << endl;
-		cout << "\t\t//CXCOMPILE clang++ -o output testprogram.cpp" << endl;
-		cout << "\t\t// CXPRINTCOM TRUE" << endl;
-		cout << "\t\t//CXGENRUN FALSE" << endl;
+		cout << "************** CX HELP *****************\n" << endl;
+		cout << "CX automatically compiles and runs C++" << endl;
+		cout << "programs.\n" << endl;
+		cout << "CX works by looking for a compile command" << endl;
+		cout << "written in a comment with the first word" << endl;
+		cout << "'CXCOMPILE'. If multiple such comments exist," << endl;
+		cout << "they will be executed in a top to bottom" << endl;
+		cout << "order. If no such commands exist, CX will try" << endl;
+		cout << "to automatically determine what compiler flags" << endl;
+		cout << "are neccesary, but this function is still" << endl;
+		cout << "being developed.\n" << endl;
+		cout << "The command 'CXPRINTCOM' can be used to tell CX" << endl;
+		cout << "whether or not it should print the commands it" << endl;
+		cout << "will run. CXPRINTCOM must be followed immediately" << endl;
+		cout << "by a space then 'TRUE' or 'FALSE', all uppercase," << endl;
+		cout << "no quotes. Defaults to off.\n" << endl;
+		cout << "The command 'CXVERCOM' can be used to tell CX" << endl;
+		cout << "whether or not it should verify the commands" << endl;
+		cout << "it will run with the user before running them." << endl;
+		cout << "CXVERCOM must be followed immediately by a space" << endl;
+		cout << "then 'TRUE' or 'FALSE', all uppercase, no quotes." << endl;
+		cout << "Defaults to off.\n" << endl;
+		cout << "The command 'CXGENRUN' can be used to tell CX" << endl;
+		cout << "whether or not it should generate the command to" << endl;
+		cout << "run the executable. If the user provides an" << endl;
+		cout << "executable run command with a CXCOMPILE directive," << endl;
+		cout << "CXGENRUN FALSE prevents CX from generating its own" << endl;
+		cout << "run command. CXGENRUN must be followed immediately" << endl;
+		cout << "by a space then 'TRUE' or 'FALSE', all uppercase," << endl;
+		cout << "no quotes. Defaults to on.\n" << endl;
+		cout << "The command 'CXPERSIST' can be used to tell CX" << endl;
+		cout << "whether or not it should continue executing " << endl;
+		cout << "commands in the event of one command resulting in" << endl;
+		cout << "and error. CXPERSIST must be followed immediately" << endl;
+		cout << "by a space then 'TRUE' or 'FALSE', all uppercase," << endl;
+		cout << "no quotes. Defaults to off.\n" << endl;
+		cout << "NOTE: Any and all CX directives (such as CXCOMPILE" << endl;
+		cout << "and CXVERCOM) must be present before the main" << endl;
+		cout << "function is declared.\n" << endl;
+		cout << "Example usages (to run in command line):" << endl;
+		cout << "\tcx testprogram    OR    cx testprogram.cpp" << endl;
+		cout << "Example usage (to appear in testprogram.cpp):" << endl;
+		cout << "\t//CXCOMPILE clang++ -o output testprogram.cpp" << endl;
+		cout << "\t// CXPRINTCOM TRUE" << endl;
+		cout << "\t//CXGENRUN FALSE" << endl;
 		
 		return 0;
 	}
@@ -96,7 +103,7 @@ int main(int argc, char** argv){
 	ifstream file;
 	file.open(filename_w_ext);
 	if (!file.is_open()){
-		cout << "\tERROR: Failed to open file '" << argv[1] << "'" << endl;
+		cout << "ERROR: Failed to open file '" << argv[1] << "'" << endl;
 		return -1;
 	}
 	
@@ -107,6 +114,7 @@ int main(int argc, char** argv){
 	bool print_commands = false; //Print commands before running them
 	bool verify_commands = false; //Verify commands with user before running them
 	bool generate_run_command = true; //CX must generate its own command to run the executable
+	bool persist_on_error = false; //If true, CX will continue executing commands even if one returns and error
 	
 	//Scan through file, look for
 	string line;
@@ -130,24 +138,24 @@ int main(int argc, char** argv){
 		//Look for 'print commands' commands
 		if (line.substr(0, 13) == "// CXPRINTCOM"){
 			if (line.length() < 18){
-				cout << "\tDIRECTIVE SKIPPED: No boolean argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
 			}else if(line.substr(14) == "TRUE"){
 				print_commands = true;
 			}else if(line.substr(14) == "FALSE"){
 				print_commands = false;
 			}else{
-				cout << "\tDIRECTIVE SKIPPED: Invalid argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
 			}
 			continue;
 		}else if (line.substr(0, 12) == "//CXPRINTCOM"){
 			if (line.length() < 17){
-				cout << "\tDIRECTIVE SKIPPED: No boolean argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
 			}else if(line.substr(13) == "TRUE"){
 				print_commands = true;
 			}else if(line.substr(13) == "FALSE"){
 				print_commands = false;
 			}else{
-				cout << "\tDIRECTIVE SKIPPED: Invalid argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXPRINTCOM' on line " << line_number << "." << endl;
 			}
 			continue;
 		}
@@ -155,24 +163,24 @@ int main(int argc, char** argv){
 		//Look for 'verify commands' commands
 		if (line.substr(0, 11) == "// CXVERCOM"){
 			if (line.length() < 16){
-				cout << "\tDIRECTIVE SKIPPED: No boolean argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
 			}else if(line.substr(12) == "TRUE"){
 				verify_commands = true;
 			}else if(line.substr(12) == "FALSE"){
 				verify_commands = false;
 			}else{
-				cout << "\tDIRECTIVE SKIPPED: Invalid argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
 			}
 			continue;
 		}else if (line.substr(0, 10) == "//CXVERCOM"){
 			if (line.length() < 15){
-				cout << "\tDIRECTIVE SKIPPED: No boolean argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
 			}else if(line.substr(11) == "TRUE"){
 				verify_commands = true;
 			}else if(line.substr(11) == "FALSE"){
 				verify_commands = false;
 			}else{
-				cout << "\tDIRECTIVE SKIPPED: Invalid argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXVERCOM' on line " << line_number << "." << endl;
 			}
 			continue;
 		}
@@ -180,24 +188,49 @@ int main(int argc, char** argv){
 		//Look for 'verify commands' commands
 		if (line.substr(0, 11) == "// CXGENRUN"){
 			if (line.length() < 16){
-				cout << "\tDIRECTIVE SKIPPED: No boolean argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
 			}else if(line.substr(12) == "TRUE"){
 				generate_run_command = true;
 			}else if(line.substr(12) == "FALSE"){
 				generate_run_command = false;
 			}else{
-				cout << "\tDIRECTIVE SKIPPED: Invalid argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
 			}
 			continue;
 		}else if (line.substr(0, 10) == "//CXGENRUN"){
 			if (line.length() < 15){
-				cout << "\tDIRECTIVE SKIPPED: No boolean argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
 			}else if(line.substr(11) == "TRUE"){
 				generate_run_command = true;
 			}else if(line.substr(11) == "FALSE"){
 				generate_run_command = false;
 			}else{
-				cout << "\tDIRECTIVE SKIPPED: Invalid argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXGENRUN' on line " << line_number << "." << endl;
+			}
+			continue;
+		}
+		
+		//Look for 'print commands' commands
+		if (line.substr(0, 12) == "// CXPERSIST"){
+			if (line.length() < 17){
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXPERSIST' on line " << line_number << "." << endl;
+			}else if(line.substr(13) == "TRUE"){
+				persist_on_error = true;
+			}else if(line.substr(13) == "FALSE"){
+				persist_on_error = false;
+			}else{
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXPERSIST' on line " << line_number << "." << endl;
+			}
+			continue;
+		}else if (line.substr(0, 11) == "//CXPERSIST"){
+			if (line.length() < 16){
+				cout << "DIRECTIVE SKIPPED: No boolean argument provided after call to 'CXPERSIST' on line " << line_number << "." << endl;
+			}else if(line.substr(12) == "TRUE"){
+				persist_on_error = true;
+			}else if(line.substr(12) == "FALSE"){
+				persist_on_error = false;
+			}else{
+				cout << "DIRECTIVE SKIPPED: Invalid argument provided after call to 'CXPERSIST' on line " << line_number << "." << endl;
 			}
 			continue;
 		}
@@ -226,9 +259,9 @@ int main(int argc, char** argv){
 	
 	//Print commands if requested
 	if (print_commands){
-		cout << "\tWill run: " << endl;
+		cout << "Will run: " << endl;
 		for (int i = 0 ; i < compiler_commands.size() ; i++){
-			cout << "\t\t[" << i+1 << ".] '" << compiler_commands[i] << "'" << endl;
+			cout << "\t[" << i+1 << ".] '" << compiler_commands[i] << "'" << endl;
 		}
 	}
 	
@@ -245,7 +278,15 @@ int main(int argc, char** argv){
 
 	//Run commands
 	for (int i = 0 ; i < compiler_commands.size() ; i++){
-		system(compiler_commands[i].c_str());
+		int error_code = system(compiler_commands[i].c_str());
+		if (error_code != 0){
+			cout << "\nERROR ENCOUNTERED: The previous CX command triggered and error." << endl;
+			cout << "\tcommand: '" << compiler_commands[i] << "', error code: " << error_code << endl;
+			if (!persist_on_error){
+				cout << "CX ABORT" << endl;
+				return -1;
+			}
+		}
 	}
 	
 	return 0;
