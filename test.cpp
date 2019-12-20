@@ -1,6 +1,0 @@
-//CXCOMPILE echo this worked
-// CXCOMPILE say Hallo leben
-// CXPRINTCOM TRUE
-// CXVERCOM TRUE
-// CXGENRUN FALSE
-//CXGENRUN TRUE
