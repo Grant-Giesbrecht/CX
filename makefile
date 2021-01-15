@@ -19,8 +19,10 @@ install_linux: cx_linux
 	@mv ./cx $(INSTALL_BIN_DIR)cx
 	@echo "CX installed in $(INSTALL_BIN_DIR)"
 
-test: install
-	@echo "Test not yet implimented"
+test:
+	@echo "If 'CX Installed Correctly' prints below, installation was"
+	@echo "successful. Otherwise, an error occured."
+	@cd tests; cx test1
 
 uninstall:
 	rm $(INSTALL_BIN_DIR)cx
