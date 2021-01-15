@@ -1,5 +1,9 @@
-CC = clang++
-CC_LINUX = g++
+OS := $(shell uname)
+ifeq ($(OS),Darwin)
+	CC = clang++ -std=c++11
+else
+	CC = g++ -std=c++11
+endif
 
 TEST_DIR = tests
 
@@ -8,14 +12,7 @@ INSTALL_BIN_DIR = /usr/local/bin/
 cx: cx.cpp
 	@$(CC) -o cx cx.cpp
 
-cx_linux: cx.cpp
-	@$(CC_LINUX) -o cx cx.cpp
-
 install: cx
-	@mv ./cx $(INSTALL_BIN_DIR)cx
-	@echo "CX installed in $(INSTALL_BIN_DIR)"
-
-install_linux: cx_linux
 	@mv ./cx $(INSTALL_BIN_DIR)cx
 	@echo "CX installed in $(INSTALL_BIN_DIR)"
 
