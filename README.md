@@ -44,6 +44,11 @@ the start menu will get in to the right window to edit the path).
 new window after changing the environment variables for them to update) and 
 you should see the 'No imput arguments' message. If so, you're good to go!
 
+Note: You will need to explicitly tell CX how to run your program via CX
+directives (CXGENRUN and CXCOMPILE). CX will try to run your program using
+the UNIX-style commands used by macOS and Linux, hence the need to tell it 
+"how to Windows".
+
 ## Uninstall
 
 CX is entirely contained in one binary. By default, it is installed in
