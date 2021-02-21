@@ -47,7 +47,11 @@ you should see the 'No imput arguments' message. If so, you're good to go!
 Note: You will need to explicitly tell CX how to run your program via CX
 directives (CXGENRUN and CXCOMPILE). CX will try to run your program using
 the UNIX-style commands used by macOS and Linux, hence the need to tell it 
-"how to Windows".
+"how to Windows". For a program called 'sandbox', this would look like:
+
+    //CXCOMPILE g++ -o sandbox sandbox.cpp
+    //CXCOMPILE sandbox.exe
+    //CXGENRUN FALSE
 
 ## Uninstall
 
