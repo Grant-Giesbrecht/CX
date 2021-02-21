@@ -35,7 +35,7 @@ specific makefile is not included. However, you can install CX on a windows
 machine if you have a C++ compiler available. The steps to do so are:
 
 1. Compile CX using your compiler of choice. I would recommend Mingw-w64's port
-of gcc. Using gcc, you would compile CX as `gcc -o cx cx.cpp`.
+of g++. Using g++, you would compile CX as `g++ -o cx cx.cpp`.
 2. Place CX somewhere in your system path. Alternatively, you can place it in a
 new folder such as a 'bin' folder in your 'C:\Program Files\' and add the new
 folder to your PATH environment variable (searching 'environment variable' in 
